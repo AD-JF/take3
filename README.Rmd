@@ -1,11 +1,25 @@
+---
+output: github_document
+---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  message = F, 
+  warning = F, 
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "90%",
+  fig.align = "center"
+)
+```
 
 # neuralprophet
 
 <!-- badges: start -->
-
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/neuralprophet)](https://cran.r-project.org/package=neuralprophet)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/neuralprophet)](https://cran.r-project.org/package=neuralprophet)
 ![](http://cranlogs.r-pkg.org/badges/neuralprophet?color=brightgreen)
 ![](http://cranlogs.r-pkg.org/badges/grand-total/neuralprophet?color=brightgreen)
 [![R-CMD-check](https://github.com/AlbertoAlmuinha/neuralprophet/workflows/R-CMD-check/badge.svg)](https://github.com/AlbertoAlmuinha/neuralprophet/actions)
@@ -13,20 +27,24 @@
 
 > The NEW Neural Prophet arrives to R!
 
-    # Install Development Version 
-    remotes::install_github("AlbertoAlmuinha/neuralprophet")
+```
+# Install Development Version 
+remotes::install_github("AlbertoAlmuinha/neuralprophet")
+```
 
 Not on CRAN yet:
 
-``` r
+```{r}
 #install.packages("neuralprophet")
 ```
+
+
 
 ## Neural Prophet Algorithm
 
 Using `neural_prophet()`, which connects to `Python NeuralProphet()`.
 
-``` r
+```{r example, warning=FALSE, message=FALSE}
 library(neuralprophet)
 library(tidymodels)
 library(tidyverse)
@@ -61,21 +79,17 @@ modeltime_table(
     plot_modeltime_forecast(.interactive = FALSE)
 ```
 
-<img src="man/figures/README-example-1.png" width="90%" style="display: block; margin: auto;" />
-
 ## Installation
 
 There are 2 key components to installing neuralprophet:
 
-1.  Download the R-Package, `neuralprophet`. This installs the
-    R-Bindings, which allows you to interface with NeuralProphet
+1. Download the R-Package, `neuralprophet`. This installs the R-Bindings, which allows you to interface with NeuralProphet 
 
-2.  Set up the Python Environment so `neuralprophet` can connect to the
-    `neuralprophet` python package.
+2. Set up the Python Environment so `neuralprophet` can connect to the `neuralprophet` python package. 
 
 ### Step 1 - Download & Install neuralprophet
 
-Download the latest development version.
+Download the latest development version.  
 
 ``` r
 remotes::install_github("AlbertoAlmuinha/neuralprophet")
@@ -83,37 +97,34 @@ remotes::install_github("AlbertoAlmuinha/neuralprophet")
 
 ### Step 2 - Python Environment Setup
 
-Next, you’ll need to set up a Python Environment that contains at a
-minimum:
+Next, you'll need to set up a Python Environment that contains at a minimum: 
 
--   `neuralprophet==0.2.7`
--   `pillow==8.3.0`
--   `pandas==1.2.5`
--   `numpy`
--   `pytorch==1.6`
+- `neuralprophet==0.2.7`
+- `pillow==8.3.0`
+- `pandas==1.2.5`
+- `numpy`
+- `pytorch==1.6`
 
 The python environment then needs to be activated with `reticulate`.
 
-**Fast Setup**
+__Fast Setup__
 
-You can use `install_nprophet()` to prepare and bind to a python
-environment containing `neuralprophet` and the required python packages.
+You can use `install_nprophet()` to prepare and bind to a python environment containing `neuralprophet` and the required python packages. 
 
--   You only need to run this one time, and then you are good to go.
--   Each time you load `neuralprophet`, the package will include this
-    environment in it’s search process.
+- You only need to run this one time, and then you are good to go. 
+- Each time you load `neuralprophet`, the package will include this environment in it's search process. 
 
-``` r
+
+```{r, eval=F}
 # Neural Prophet Installation - Run 1st time
 install_nprophet()
 ```
 
 ### Step 3 - Restart R and Try an Example
 
-Restart your R session (if in RStudio, close and re-open). Then try this
-example.
+Restart your R session (if in RStudio, close and re-open). Then try this example. 
 
-``` r
+```{r, eval=F}
 library(neuralprophet)
 library(tidymodels)
 library(tidyverse)
@@ -148,25 +159,17 @@ modeltime_table(
     plot_modeltime_forecast(.interactive = FALSE)
 ```
 
+
 ## Troubleshooting Installation
 
-Python Environment setup is always fun. Here are a few recommendations
-if you run into an issue.
+Python Environment setup is always fun. Here are a few recommendations if you run into an issue.
 
--   **Check to make sure Conda or Miniconda is available** using
-    `reticulate::conda_version()`. If no conda version is returned, then
-    use `reticulate::install_miniconda()` to install Miniconda
-    (recommended vs full Aniconda). Then (re-)run `install_gluonts()`.
+- __Check to make sure Conda or Miniconda is available__ using `reticulate::conda_version()`. If no conda version is returned, then use `reticulate::install_miniconda()` to install Miniconda (recommended vs full Aniconda). Then (re-)run `install_gluonts()`. 
 
--   **Check if Neural Prophet (Python) is available** using
-    `reticulate::py_module_available("neuralprophet")`. If this returns
-    `TRUE`, then your installation has succeeded in building the
-    environment, but you may have other issues like missing C++ build
-    tools (next).
+- __Check if Neural Prophet (Python) is available__ using `reticulate::py_module_available("neuralprophet")`. If this returns `TRUE`, then your installation has succeeded in building the environment, but you may have other issues like missing C++ build tools (next).
 
--   **Windows 10 error: Microsoft Visual C++ is required.** [Here are
-    the instructions for installing the C++ tools
-    needed.](https://github.com/business-science/modeltime.gluonts/issues/4)
+- __Windows 10 error: Microsoft Visual C++ is required.__ [Here are the instructions for installing the C++ tools needed.](https://github.com/business-science/modeltime.gluonts/issues/4) 
 
--   **Other installation issues.** [Please file a GitHub issue
-    here.](https://github.com/AlbertoAlmuinha/neuralprophet/issues)
+- __Other installation issues.__ [Please file a GitHub issue here.](https://github.com/AlbertoAlmuinha/neuralprophet/issues)
+
+
